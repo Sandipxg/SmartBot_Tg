@@ -290,3 +290,24 @@ async def save_uploaded_pdf(
     logger.info(f"Saved PDF to: {file_path} ({len(file_bytes)} bytes)")
 
     return file_path
+
+
+def delete_local_pdf(telegram_user_id: int, filename: str):
+    """
+    Delete a locally saved PDF file and clean up its user folder if empty.
+    """
+    try:
+        user_dir = config.upload_dir / str(telegram_user_id)
+        file_path = user_dir / filename
+        if file_path.exists():
+            file_path.unlink()
+            logger.info(f"Deleted local PDF file: {file_path}")
+            
+            # Clean up user directory if it's empty
+            if user_dir.exists() and not any(user_dir.iterdir()):
+                user_dir.rmdir()
+                logger.info(f"Deleted empty user folder: {user_dir}")
+        else:
+            logger.warning(f"Attempted to delete local PDF but it did not exist: {file_path}")
+    except Exception as e:
+        logger.error(f"Error deleting local PDF for user {telegram_user_id}: {e}", exc_info=True)

@@ -106,6 +106,11 @@ async def save_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             doc_id = documents[0].metadata.get("document_id", "unknown")
             session.add_document(doc_id, file_name)
             await session_manager.save_session(chat_id)
+            
+            # Start background deletion task (10 minutes)
+            from telegram_bot.handlers.permsave import delete_temp_document
+            import asyncio
+            asyncio.create_task(delete_temp_document(chat_id, doc_id, file_name))
 
         # Step 8: Success message
         total_pages = documents[0].metadata.get("total_pages", "?") if documents else "?"
@@ -113,9 +118,10 @@ async def save_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f"✅ `{file_name}` saved successfully to this chat!\n\n"
             f"📊 Stats:\n"
             f"• Pages: {total_pages}\n"
-            f"• Chunks created: {len(documents)}\n"
+            f"• Chunks: {len(documents)}\n"
             f"• Vectors stored: {len(doc_ids)}\n\n"
-            f"💬 It has been set as the active document. You can now ask questions about it!",
+            f"💬 Active document set. Ask questions about it!\n\n"
+            f"⏳ *Note:* This file is stored temporarily and will be deleted in **10 minutes** unless you save it using `/permanentSave`.",
             parse_mode="Markdown"
         )
 
