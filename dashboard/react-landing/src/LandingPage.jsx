@@ -31,8 +31,9 @@ const LandingPage = () => {
             <span className="font-display font-extrabold text-xl tracking-tight text-[#3D4852]">SmartBot Suite</span>
           </a>
 
-          {/* Desktop Links */}
+          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
+            <a href="/documentation.html" className="font-medium text-sm text-[#6B7280] hover:text-[#3D4852] transition-colors focus:outline-none focus:ring-2 focus:ring-[#6C63FF] focus:ring-offset-2 rounded px-2 py-1">Documentation</a>
             <a href="#how-it-works" className="font-medium text-sm text-[#6B7280] hover:text-[#3D4852] transition-colors focus:outline-none focus:ring-2 focus:ring-[#6C63FF] focus:ring-offset-2 rounded px-2 py-1">How it Works</a>
             <a href="#bricks" className="font-medium text-sm text-[#6B7280] hover:text-[#3D4852] transition-colors focus:outline-none focus:ring-2 focus:ring-[#6C63FF] focus:ring-offset-2 rounded px-2 py-1">Brick Library</a>
             <a href="#architecture" className="font-medium text-sm text-[#6B7280] hover:text-[#3D4852] transition-colors focus:outline-none focus:ring-2 focus:ring-[#6C63FF] focus:ring-offset-2 rounded px-2 py-1">Architecture</a>
@@ -58,6 +59,7 @@ const LandingPage = () => {
         {/* Mobile Dropdown Menu */}
         <div className={`md:hidden overflow-hidden bg-[#E0E5EC] transition-all duration-300 ease-in-out px-6 ${isMobileMenuOpen ? 'max-h-[400px] opacity-100 mt-4 pb-6' : 'max-h-0 opacity-0'}`}>
           <div className="flex flex-col gap-4">
+            <a href="/documentation.html" className="font-medium text-sm text-[#3D4852] py-2 border-b border-gray-300/40">Documentation</a>
             <a href="#how-it-works" onClick={closeMobileMenu} className="font-medium text-sm text-[#3D4852] py-2 border-b border-gray-300/40">How it Works</a>
             <a href="#bricks" onClick={closeMobileMenu} className="font-medium text-sm text-[#3D4852] py-2 border-b border-gray-300/40">Brick Library</a>
             <a href="#architecture" onClick={closeMobileMenu} className="font-medium text-sm text-[#3D4852] py-2 border-b border-gray-300/40">Architecture</a>
