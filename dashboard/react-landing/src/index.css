@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neumorphic-bg: #E0E5EC;
+  --color-neumorphic-fg: #3D4852;
+  --color-neumorphic-muted: #6B7280;
+  --color-neumorphic-accent: #6C63FF;
+  --color-neumorphic-accentLight: #8B84FF;
+  --color-neumorphic-accentSecondary: #38B2AC;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+}
