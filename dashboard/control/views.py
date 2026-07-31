@@ -18,7 +18,7 @@ from .utils.docker_client import (
 )
 
 def landing(request):
-    return render(request, 'control/landing.html')
+    return redirect('home')
 
 def login_view(request):
     return render(request, 'control/login.html')
@@ -616,12 +616,12 @@ def github_oauth_callback(request):
         return HttpResponse(
             '<html><body><script>'
             'localStorage.setItem("isLoggedIn","true");'
-            'window.location.href="/dashboard/";'
+            'window.location.href="http://localhost:8000/dashboard/";'
             '</script></body></html>',
             content_type='text/html'
         )
     except Exception as e:
-        return redirect(f'/login/?msg=GitHub Auth Error: {urllib.parse.quote(str(e))}')
+        return redirect(f'http://localhost:5173/login?msg=GitHub Auth Error: {urllib.parse.quote(str(e))}')
 
 def get_google_redirect_uri(request):
     uri = request.build_absolute_uri('/auth/google/callback/')
@@ -715,7 +715,7 @@ def google_oauth_callback(request):
         return HttpResponse(
             '<html><body><script>'
             'localStorage.setItem("isLoggedIn","true");'
-            'window.location.href="/dashboard/";'
+            'window.location.href="http://localhost:8000/dashboard/";'
             '</script></body></html>',
             content_type='text/html'
         )
@@ -729,4 +729,4 @@ def google_oauth_callback(request):
             except Exception:
                 pass
         print(f"❌ Google OAuth Exception: {err_msg}")
-        return redirect(f'/login/?msg=Google Auth Error: {urllib.parse.quote(err_msg)}')
+        return redirect(f'http://localhost:5173/login?msg=Google Auth Error: {urllib.parse.quote(err_msg)}')
